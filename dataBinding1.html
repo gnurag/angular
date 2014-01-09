@@ -1,9 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <title></title>
 </head>
-<body>
+
+<script src="angular.js"></script>
+
+<body ng-controller="TextController">
+
+<nav ng-controller="NavController">
+    <li ng-click="dosomethingDo()">something</li>
+</nav>
+
+<section ng-controller="ContentController">
+    <div ng-click="dosomethingDo()">...</div>
+</section>
+
+<script>
+    var myAppModule = angular.module('myapp', []);
+
+    myAppModule.controller('TextController',
+            function TextController($scope) {
+                var someText = {};
+                someText.message = 'MEssage';
+                $scope.someText = someText;
+            }
+    );
+
+    function UpController($scope) {
+        $scope.calculatedBox = function () {
+            $scope.needed = $scope.startingEstimate * 10;
+        }; // property function
+
+        $scope.requestFunding = function () {
+            alert('validation');
+        }; // property function
+
+        $scope.reset = function () {
+            $scope.startingEstimate = 0;
+        }; // property function
+
+    } // end of Controller
+
+    function NavController($scope) {
+        $scope.dosomethingDo = doA;
+    }
+
+    function ContentController($scope) {
+        $scope.dosomethingDo = doB;
+    }
+
+    var students = [
+        {name: "ccc", id: 1} ,
+        {name: "ddd", id: 2},
+        {name: "fff", id: 3}
+    ]; // Model
+
+    function StudentControoler($scope) {
+        $scope.students = students ;
+
+        $scope.insertTom() = function() {
+           $scope.students.splice(1,0,{name:'tt',id:44}) ;
+        } ;
+
+    }
+
+</script>
+
+<ul ng-controller="StudentController">
+    <li ng-repeat="student in students">
+        <a href="view/{{student.id}}">{{student.name}}</a>
+    </li>
+    <button ng-click="insertTom()">Insert</button>
+</ul>
+
+
+<p>{{someText.message}}</p>
 
 </body>
 </html>

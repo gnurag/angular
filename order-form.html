@@ -3,36 +3,28 @@
 <head>
     <title>Order Form</title>
 </head>
+
+<script src="angular.js"></script>
+<script src="cart_controller.js"></script>
+
+<script>
+    //    alert("aaa");
+</script>
+
 <body ng-controller="CartController">
 <h1>My Order Form</h1>
 
 <div ng-repeat="item in items">
+    <span>{{item}}</span>
     <span>{{item.title}}</span>
     <input ng-model="item.quantity">
     <span>{{item.price*item.quantity | currency}}</span>
     <button ng-click="remove($index)">Remove</button>
 </div>
-<script src="angular.js"></script>
+
 <script>
-    function CartController($scope) {
-        $scope.items = [
-            {
-                title: 'bucket of paint ',
-                quantity: 8,
-                price: 3.95
-            } ,
-            {
-                title: "ribbon" ,
-                quantity: 10 ,
-                price:9.95
-            }
-            {
-                title: "ball" ,
-                quantity: 100 ,
-                price:10
-            }
-        ]
-    }
+    //    alert("SSS");
 </script>
+
 </body>
 </html>

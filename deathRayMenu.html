@@ -1,9 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <title></title>
+    <script src="angular.js"></script>
+    <style>
+        .menu-disabled-true {
+            color: gray;
+        }
+    </style>
 </head>
 <body>
+
+<div ng-controller="DeathMenuController">
+    <button ng-click="toggleMenu()">Menu on/off</button>
+    <ul ng-show="showMenu">
+        <li  class="menu-disabled-{{isDiabled}}"   ng-click="stun">stun</li>
+        <li ng-click="disintegrate">disintegrate</li>
+        <li ng-click="erase">Erase</li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    function DeathMenuController($scope) {
+        $scope.isDisabled = false ;
+        $scope.showMenu = false ;
+
+        $scope.toggleMenu() = function() {
+           $scope.showMenu = !$scope.showMenu ;
+            $scope.isDisabled = true ;
+        } ;
+    }
+</script>
 
 </body>
 </html>

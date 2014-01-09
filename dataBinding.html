@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
-    <title></title>
+    <title>P</title>
 </head>
-<body>
+<body ng-controller="TextController">
+<p>{{someText}}</p>
+
+<script src="angular.js"></script>
+
+<script>
+    var mm = {} ;
+    mm.someText  = 'Ther' ;
+    function TextController($scope) {
+        $scope.someText = mm ;
+    }
+</script>
+
 
 </body>
 </html>

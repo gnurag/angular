@@ -1,9 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
-    <title></title>
+    <title>Order Discount</title>
+    <script src="angular.js"></script>
 </head>
 <body>
+
+<div ng-controller="CartController">
+    <div ng-repeat="item in items">
+        <span>{{item.title}}</span>
+        <input ng-model="item.quantity"/>
+        <span>{{item.price | currency}}</span>
+        <span>{{item.price*item.quantity | currency}}</span>
+    </div>
+    <div>Total: {{totalCart() | currency}}</div>
+    <div>Discount : {{bill.discount || currency}}</div>
+    <div>Cost:{{subtotal() | currency}}</div>
+</div>
+
+<script type="text/javascript">
+
+    function CartController($scope) {
+        $scope.bill = {};
+
+        $scope.items = [
+            { title: 'p1', quantity: 8, price: 3.95},
+            { title: 'p1', quantity: 18, price: 10.95},
+            { title: 'p1', quantity: 85, price: 8.5}
+        ];
+        $scope.$watch(function () { // observe Model 은 items
+            var total = 0;
+            for (i = 0; i < $scope.items.length; i++) {
+                total = total + ($scope.item[i].price * $scope.item[i].quantity);
+            }
+            $scope.bill.totalCart = total;
+            $scope.bill.discount = total > 100 ? 10 : 0;
+            $scope.bill.subtotal = total - $scope.bill.subtotal;
+        });
+
+    }
+
+    // Define Module to use shopping view
+    var shoppingModule = angular.module('ShoppingModule', []);
+
+    // Define service factory to make Items interface in Sever Data Base
+    shoppingModule.factory('Items', function () {
+        var items = {};
+        items.query = function () {
+            // It's object which to get Data from D/B if it's production level
+            return [
+                {title: 'pp', description: "DD", price: 333},
+                {title: 'pp', description: "DD", price: 333},
+                {title: 'pp', description: "DD", price: 333}
+            ];
+        };
+        return items;
+    });
+
+</script>
 
 </body>
 </html>
